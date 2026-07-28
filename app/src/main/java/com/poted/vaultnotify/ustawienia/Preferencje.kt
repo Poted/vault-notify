@@ -17,6 +17,7 @@ class Preferencje(private val context: Context) {
         val DIAGNOSTYKA = booleanPreferencesKey("diagnostyka_wlaczona")
         val LICZNIK_POWIADOMIEN = intPreferencesKey("licznik_powiadomien")
         val OSTATNIE_POWIADOMIENIE_CZAS = longPreferencesKey("ostatnie_powiadomienie_czas")
+        val OSTATNIA_SYNCHRONIZACJA_CZAS = longPreferencesKey("ostatnia_synchronizacja_czas")
     }
 
     val diagnostykaWlaczona: Flow<Boolean> =
@@ -28,8 +29,15 @@ class Preferencje(private val context: Context) {
     val ostatniePowiadomienieCzas: Flow<Long?> =
         context.dataStore.data.map { it[Klucze.OSTATNIE_POWIADOMIENIE_CZAS] }
 
+    val ostatniaSynchronizacjaCzas: Flow<Long?> =
+        context.dataStore.data.map { it[Klucze.OSTATNIA_SYNCHRONIZACJA_CZAS] }
+
     suspend fun ustawDiagnostyke(wlaczona: Boolean) {
         context.dataStore.edit { it[Klucze.DIAGNOSTYKA] = wlaczona }
+    }
+
+    suspend fun ustawOstatniaSynchronizacje(czas: Long) {
+        context.dataStore.edit { it[Klucze.OSTATNIA_SYNCHRONIZACJA_CZAS] = czas }
     }
 
     suspend fun zarejestrujOdebranePowiadomienie(czas: Long) {

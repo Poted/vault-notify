@@ -4,12 +4,16 @@ import android.app.Application
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import com.poted.vaultnotify.notifications.VaultNotifyListenerService
+import com.poted.vaultnotify.sync.zaplanujCzyszczenie
+import com.poted.vaultnotify.sync.zaplanujOkresowaSynchronizacje
 
 class VaultNotifyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
         wymusPonowneZbindowanieListenera()
+        zaplanujOkresowaSynchronizacje(this)
+        zaplanujCzyszczenie(this)
     }
 
     /**
