@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WydatekDao {
@@ -18,7 +19,7 @@ interface WydatekDao {
     suspend fun pobierzWedlugStatusu(status: Status): List<Wydatek>
 
     @Query("SELECT COUNT(*) FROM Wydatek WHERE status = :status")
-    suspend fun policzWedlugStatusu(status: Status): Int
+    fun policzWedlugStatusu(status: Status): Flow<Int>
 
     @Query("UPDATE Wydatek SET status = :status WHERE id IN (:idki)")
     suspend fun ustawStatus(idki: List<Long>, status: Status)
