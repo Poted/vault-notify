@@ -1,0 +1,9 @@
+# Skopiuj do local.properties (plik jest w .gitignore, nigdy nie commituj go z realnymi wartościami).
+
+sdk.dir=/sciezka/do/Android/sdk
+
+# URL wdrożenia Web App z backend/Code.gs (patrz backend/README.md).
+SHEETS_URL=https://script.google.com/macros/s/TWOJE_WDROZENIE/exec
+
+# Wartość właściwości skryptu TOKEN ustawionej w Apps Script.
+SHEETS_TOKEN=wstaw-swoj-token
