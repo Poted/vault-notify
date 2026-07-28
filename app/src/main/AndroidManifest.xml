@@ -4,10 +4,21 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".VaultNotifyApplication"
         android:allowBackup="false"
         android:label="@string/app_name">
 
-        <!-- NotificationListenerService i ekran główny zostaną dodane w kolejnych etapach. -->
+        <!-- Ekran główny zostanie dodany w etapie UI. -->
+
+        <service
+            android:name=".notifications.VaultNotifyListenerService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
 
     </application>
 
