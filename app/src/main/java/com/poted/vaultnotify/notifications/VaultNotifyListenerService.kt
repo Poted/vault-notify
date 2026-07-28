@@ -5,6 +5,8 @@ import android.content.ComponentName
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
+import com.poted.vaultnotify.data.AppDatabase
+import com.poted.vaultnotify.parser.sparsuj
 import com.poted.vaultnotify.ustawienia.Preferencje
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -65,8 +67,13 @@ class VaultNotifyListenerService : NotificationListenerService() {
         val kandydaci = kandydaciTekstu(tekst, bigText, liniePodgladu)
         if (kandydaci.isEmpty()) return
 
-        // TODO(etap 4): dla każdego kandydata wywołać sparsuj(paczka, tytul, kandydat, czas)
-        // i wstawić wynik (Wydatek, również z kwota == null) do Room przez repozytorium.
+        scope.launch {
+            val dao = AppDatabase.pobierz(applicationContext).wydatekDao()
+            kandydaci.forEach { kandydat ->
+                val wydatek = sparsuj(paczka, tytul, kandydat, czas) ?: return@forEach
+                dao.wstaw(wydatek)
+            }
+        }
     }
 
     override fun onDestroy() {
