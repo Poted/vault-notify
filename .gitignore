@@ -1,0 +1,24 @@
+# Local config (contains SHEETS_URL / SHEETS_TOKEN) — never commit.
+local.properties
+
+# Android / Gradle
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.ap_
+*.dex
+*.class
+/app/build/
+/app/release/
+/app/debug/
+
+# Keystores / signing
+*.jks
+*.keystore
